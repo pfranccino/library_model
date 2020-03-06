@@ -7,7 +7,11 @@ import androidx.annotation.RequiresApi
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.LinkedBlockingQueue
 
-class CustomThread(private val queue: LinkedBlockingQueue<YuvImage>, val detector: Classifier , private val listener: TensorFlowListener) :
+class CustomThread(
+    private val queue: LinkedBlockingQueue<YuvImage>,
+    val detector: Classifier,
+    private val listener: TensorFlowListener
+) :
     Thread() {
 
     var start = false
@@ -37,7 +41,7 @@ class CustomThread(private val queue: LinkedBlockingQueue<YuvImage>, val detecto
                         Rect(0, 0, inputFrame.width, inputFrame.height)
                     )
 
-                 runObjectDetection(bitmapFrame!!)
+                    runObjectDetection(bitmapFrame!!)
 
 
                 }
@@ -62,8 +66,6 @@ class CustomThread(private val queue: LinkedBlockingQueue<YuvImage>, val detecto
         )
 
         val results = detector.recognizeImage(scaledBmp)
-        Log.e(javaClass.simpleName , results.toString())
-
         listener.OnSuccessListener(results)
 
 
