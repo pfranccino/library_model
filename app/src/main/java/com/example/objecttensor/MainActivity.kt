@@ -56,27 +56,6 @@ class MainActivity : AppCompatActivity(), TensorFlowListener {
         }
     }
 
-    private fun getPermission(): Boolean {
-        var state = false
-        Dexter.withActivity(this).withPermission(Manifest.permission.CAMERA)
-            .withListener(object : PermissionListener {
-                override fun onPermissionGranted(response: PermissionGrantedResponse?) {
-                    state = true
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    permission: PermissionRequest?,
-                    token: PermissionToken?
-                ) {
-                    token?.continuePermissionRequest()
-                }
-
-                override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                }
-            })
-        return state
-    }
 
 
     override fun OnSuccessListener(yuvImage: List<Recognition?>?) {
